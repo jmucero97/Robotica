@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 
   image_transport::Subscriber image_sub_;
 
-  image_sub_ = it_.subscribe("/camera/rgb/image_color", 1, imageCb); //subscribes to the Kinect video frames
+  image_sub_ = it_.subscribe("/camera/rgb/image_raw", 1, imageCb); //subscribes to the Kinect video frames
 
   ros::spin();
   return 0;

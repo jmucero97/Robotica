@@ -7,11 +7,8 @@ project(epd4)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
+find_package(catkin REQUIRED COMPONENTS roscpp cv_bridge image_transport OpenCV
 )
-find_package(OpenCV)
-include_directories(${OpenCV_INCLUDE_DIRS})
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -119,10 +116,15 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 add_executable(epd4_c3 src/nodec3.cpp src/student.cpp)
+add_executable(epd_c4 src/nodec4.cpp src/student.cpp)
 
 target_link_libraries(epd4_c3 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(epd_c4 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+
+
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
