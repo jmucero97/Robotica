@@ -79,7 +79,7 @@ bool Turtlebot::doAllRaysDetectObstacle(){
   int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
   for (int i = 0; i < numAngles; i++)
   {
-    allDetect = allDetect && !std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 1.5;
+    allDetect = allDetect && !std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 1;
   }
 
   return allDetect;
@@ -93,7 +93,7 @@ float Turtlebot::primerAnguloSinObstaculo(){
   int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
   for (int i = 0; (i < numAngles) && !enc; i++)
   {
-    if(std::isnan(data_scan.ranges.at(i)) || data_scan.ranges.at(i) >= 1.5 ){
+    if(std::isnan(data_scan.ranges.at(i)) || data_scan.ranges.at(i) >= 1 ){
       //RAYO SIN OBSTACULO
       anguloEnRadianes = i * -data_scan.angle_increment + 0.52;
       enc = true;
@@ -151,7 +151,7 @@ bool Turtlebot::command(double gx, double gy)
   
   for (int i = 0; i < numAngles; i++)
   {
-    if (!std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 1.5)
+    if (!std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 1)
     {
       obstacle = true;
       counter = 200;
@@ -216,9 +216,9 @@ bool Turtlebot::command(double gx, double gy)
     }else{
       linear_vel = 0.1;
       if(obstacle){
-      float angulo = primerAnguloSinObstaculo() + 0.3;
-      angular_vel = 0.5 * (alfa_in_rad-angulo) / 2 * M_PI;
-      ROS_INFO("Radianes Rayo que deteca obstaculo: %f\n",angulo);
+        float angulo = primerAnguloSinObstaculo() + 0.3;
+        angular_vel = 0.5 * angulo / 2 * M_PI;
+        ROS_INFO("Radianes Rayo que deteca obstaculo: %f\n",angulo);
       }else{
         angular_vel = 0;
       }
