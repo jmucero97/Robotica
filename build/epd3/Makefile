@@ -100,6 +100,17 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -121,17 +132,6 @@ install/local: preinstall
 install/local/fast: install/local
 
 .PHONY : install/local/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -180,6 +180,48 @@ epd3-c3/fast:
 	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3.dir/build.make epd3/CMakeFiles/epd3-c3.dir/build
 .PHONY : epd3-c3/fast
 
+# Convenience name for target.
+epd3/CMakeFiles/epd3-c3-rcaa.dir/rule:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3-rcaa.dir/rule
+.PHONY : epd3/CMakeFiles/epd3-c3-rcaa.dir/rule
+
+# Convenience name for target.
+epd3-c3-rcaa: epd3/CMakeFiles/epd3-c3-rcaa.dir/rule
+
+.PHONY : epd3-c3-rcaa
+
+# fast build rule for target.
+epd3-c3-rcaa/fast:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa.dir/build
+.PHONY : epd3-c3-rcaa/fast
+
+src/c3-rcaa.o: src/c3-rcaa.cpp.o
+
+.PHONY : src/c3-rcaa.o
+
+# target to build an object file
+src/c3-rcaa.cpp.o:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa.dir/src/c3-rcaa.cpp.o
+.PHONY : src/c3-rcaa.cpp.o
+
+src/c3-rcaa.i: src/c3-rcaa.cpp.i
+
+.PHONY : src/c3-rcaa.i
+
+# target to preprocess a source file
+src/c3-rcaa.cpp.i:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa.dir/src/c3-rcaa.cpp.i
+.PHONY : src/c3-rcaa.cpp.i
+
+src/c3-rcaa.s: src/c3-rcaa.cpp.s
+
+.PHONY : src/c3-rcaa.s
+
+# target to generate assembly for a file
+src/c3-rcaa.cpp.s:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa.dir/src/c3-rcaa.cpp.s
+.PHONY : src/c3-rcaa.cpp.s
+
 src/c3.o: src/c3.cpp.o
 
 .PHONY : src/c3.o
@@ -217,10 +259,14 @@ help:
 	@echo "... install"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... test"
 	@echo "... epd3-c3"
+	@echo "... epd3-c3-rcaa"
 	@echo "... install/strip"
 	@echo "... install/local"
-	@echo "... test"
+	@echo "... src/c3-rcaa.o"
+	@echo "... src/c3-rcaa.i"
+	@echo "... src/c3-rcaa.s"
 	@echo "... src/c3.o"
 	@echo "... src/c3.i"
 	@echo "... src/c3.s"

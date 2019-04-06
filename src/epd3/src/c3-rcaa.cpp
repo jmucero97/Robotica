@@ -42,6 +42,8 @@ private:
 
   //2D robot pose
   double x, y, theta;
+
+  int counter;
   // Scan
   sensor_msgs::LaserScan data_scan;
   ros::Subscriber kinect_sub_;
@@ -58,20 +60,48 @@ private:
   //!Callback for kinect
   void receiveKinect(const sensor_msgs::LaserScan &laser_kinect);
 
-  void calcularVector(float distance, float alfa, float vector[]);
+  bool doAllRaysDetectObstacle();
+  float primerAnguloSinObstaculo();
+
 };
 
 Turtlebot::Turtlebot()
 {
+  counter = 0;
   vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel_mux/input/navi", 1);
 
   kinect_sub_ = nh_.subscribe("/scan", 1, &Turtlebot::receiveKinect, this);
 }
 
-void Turtlebot::calcularVector(float distance, float alfa, float vector[])
-{
-  vector[0] = cos(alfa) * distance;
-  vector[1] = sin(alfa) * distance;
+bool Turtlebot::doAllRaysDetectObstacle(){
+
+  bool allDetect = true;
+  int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
+  for (int i = 0; i < numAngles; i++)
+  {
+    allDetect = allDetect && !std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 1.5;
+  }
+
+  return allDetect;
+
+}
+
+float Turtlebot::primerAnguloSinObstaculo(){
+  //1º Encontrar el primer rayo que no tiene obstáculo
+  bool enc = false;
+  float anguloEnRadianes;
+  int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
+  for (int i = 0; (i < numAngles) && !enc; i++)
+  {
+    if(std::isnan(data_scan.ranges.at(i)) || data_scan.ranges.at(i) >= 1.5 ){
+      //RAYO SIN OBSTACULO
+      anguloEnRadianes = i * -data_scan.angle_increment + 0.52;
+      enc = true;
+    }
+  }
+
+  return anguloEnRadianes;
+
 }
 
 bool Turtlebot::command(double gx, double gy)
@@ -117,11 +147,15 @@ bool Turtlebot::command(double gx, double gy)
 	* the goal and the current angle of the robot. You should check if you reached the goal
 	*/
   int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
-  float vectorFinal[] = {0, 0};
+  bool obstacle = false;
+  
   for (int i = 0; i < numAngles; i++)
   {
-    if (!std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 0.75)
+    if (!std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 1.5)
     {
+      obstacle = true;
+      counter = 200;
+      /**
       float a = i * -data_scan.angle_increment + 0.52;
       float vector[] = {0, 0};
       calcularVector(data_scan.ranges.at(i), a, vector);
@@ -131,21 +165,24 @@ bool Turtlebot::command(double gx, double gy)
       float vx = vectorFinal[0] + vector[0];
       float vy = vectorFinal[1] + vector[1];
       vectorFinal[0] = vx;
-      vectorFinal[1] = vy;
+      vectorFinal[1] = vy;**/
     }
   }
+  /**
   float vectorObjetivo[] = {base_goal.point.x, base_goal.point.y};
   float x = vectorObjetivo[0] - vectorFinal[0];
   float y = vectorObjetivo[1] - vectorFinal[1];
   vectorFinal[0] = x;
-  vectorFinal[1] = y;
+  vectorFinal[1] = y;**/
 
+  float alfa_in_rad = atan2(base_goal.point.y, base_goal.point.x); //Desviación de orientación respecto al goal en radianes
+  float alfa = 180 * alfa_in_rad / M_PI;                           //Ángulo en grados
   float distance = sqrt(pow(base_goal.point.x, 2) + pow(base_goal.point.y, 2));
-  float alfa_in_rad = atan2(vectorFinal[1], vectorFinal[0]);
-  float alfa = 180 * alfa_in_rad / M_PI;
   /**
   ROS_INFO("vector final: {%f, %f}->{2,2}  distancia: %f   alfa: %f", vectorFinal[0], vectorFinal[1], distance, alfa);
 **/
+
+  //NORMAL EXECUTION
   linear_vel = 0;
   angular_vel = 0.5;
 
@@ -171,6 +208,26 @@ bool Turtlebot::command(double gx, double gy)
   {
     linear_vel = 0.5;
   }
+
+  if(obstacle || counter > 0){
+    if(doAllRaysDetectObstacle()){
+      linear_vel = 0;
+      angular_vel = 0.5;
+    }else{
+      linear_vel = 0.1;
+      if(obstacle){
+      float angulo = primerAnguloSinObstaculo() + 0.3;
+      angular_vel = 0.5 * (alfa_in_rad-angulo) / 2 * M_PI;
+      ROS_INFO("Radianes Rayo que deteca obstaculo: %f\n",angulo);
+      }else{
+        angular_vel = 0;
+      }
+      
+    }
+    counter--;
+  }
+
+  ROS_INFO("Contador: %d\n",counter);
 
   publish(angular_vel, linear_vel);
 
@@ -337,3 +394,4 @@ void visualizePlan(const std::vector<geometry_msgs::Pose> &plan, ros::Publisher 
     marker_pub.publish(marker);
   }
 }
+

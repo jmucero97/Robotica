@@ -120,9 +120,11 @@ include_directories(
 )
 
 add_executable(epd3-c3 src/c3.cpp)
+add_executable(epd3-c3-rcaa src/c3-rcaa.cpp)
 #add_executable(c2 src/c2.cpp)
 
 target_link_libraries(epd3-c3 ${catkin_LIBRARIES})
+target_link_libraries(epd3-c3-rcaa ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
