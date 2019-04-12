@@ -121,6 +121,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/juanma/catkin_ws/build/epd1/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/epd2/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/epd3/cmake_install.cmake")
+  include("/home/juanma/catkin_ws/build/epd5/cmake_install.cmake")
 
 endif()
 

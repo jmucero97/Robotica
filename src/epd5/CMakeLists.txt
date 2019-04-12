@@ -8,8 +8,11 @@ project(epd5)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  cv_bridge
+  image_transport
   roscpp
   tf
+  OpenCV
 )
 
 ## System dependencies are found with CMake's conventions
@@ -104,7 +107,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES epd5
-#  CATKIN_DEPENDS roscpp tf
+#  CATKIN_DEPENDS cv_bridge image_transport roscpp tf
 #  DEPENDS system_lib
 )
 
@@ -118,7 +121,9 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
-
+include_directories(${OpenCV_INCLUDE_DIRS})
+add_executable(epd5_c1 src/nodec1.cpp src/student.cpp)
+target_link_libraries(epd5_c1 ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/epd5.cpp

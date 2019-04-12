@@ -1,0 +1,8 @@
+prefix=/home/juanma/catkin_ws/devel
+
+Name: epd5
+Description: Description of epd5
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/juanma/catkin_ws/devel/lib 
+Requires: 
