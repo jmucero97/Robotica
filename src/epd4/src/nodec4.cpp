@@ -18,7 +18,7 @@
   {
     cv::Mat rgb_frame; //Input image in matrix form
     cv::Mat out_frame; //Output image
-
+ cv::Mat pikachu_frame;
     cv_bridge::CvImagePtr cv_ptr_rgb; //cv_bridge::CvImagePtr is a pointer type that points to NULL by default. You have to allocate storage before you can actually use it
     try
     {
@@ -32,11 +32,13 @@
     }
 
     rgb_frame = cv_ptr_rgb->image; //Here we have the current frame in OpenCV Mat format
-
+  rgb_frame.copyTo(pikachu_frame);
     processImageColor_c4(rgb_frame,out_frame);
+   processImageCircle_c4(out_frame,pikachu_frame);
    
     cv::imshow("input_image", rgb_frame); //Show a window with the input image
     cv::imshow("output_image", out_frame); //Show a window with the output image
+    cv::imshow("pikachu_image", pikachu_frame); //Show a window with the output image
     cv::waitKey(3); //Wait for 3 milliseconds
   }
     

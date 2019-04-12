@@ -3,6 +3,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
+
 //This is the function to be filled in C3
 void processImage_c3(cv::Mat &in, cv::Mat &out)
 {
@@ -46,11 +47,11 @@ void processImageColor_c4(cv::Mat &in, cv::Mat &out)
 	//This is an example:
 	//cv::filter2D(o[1],out,-1,cv::getGaussianKernel(5,2));
 
-	//PICKS GREEN
-	cv::threshold(o[0], BlueThreshold, 152.0, 255.0, cv::THRESH_BINARY);
-	cv::threshold(o[1], GreenThreshold, 255.0, 255.0, cv::THRESH_BINARY);
-	bitwise_not(GreenThreshold, GreenThreshold);
-	cv::threshold(o[2], RedThreshold, 172.0, 255.0, cv::THRESH_BINARY);
+	//PICKS YELLOW RGB(255,255,0)
+	cv::threshold(o[0], BlueThreshold, 255.0, 255.0, cv::THRESH_BINARY);
+	bitwise_not(BlueThreshold, BlueThreshold);
+	cv::threshold(o[1], GreenThreshold, 175.0, 255.0, cv::THRESH_BINARY);
+	cv::threshold(o[2], RedThreshold, 175.0, 255.0, cv::THRESH_BINARY);
 
 	bitwise_and(GreenThreshold, BlueThreshold, o1);
 	bitwise_and(o1, RedThreshold, oGreen);
@@ -69,6 +70,16 @@ void processImageColor_c4(cv::Mat &in, cv::Mat &out)
 	bitwise_not(wallOut,wallOut);
 
 	bitwise_and(oGreen, wallOut, out);
-	
+	int erosion_type =0;
+	int erosion_size = 3;
 
+	cv::Mat kernel = cv::getStructuringElement(erosion_type,cv::Size(2*erosion_size+1,2*erosion_size+1),cv::Point(erosion_size,erosion_size) );
+	erode(out, out, kernel);
+}
+void processImageCircle_c4(cv::Mat &in, cv::Mat &out)
+{
+	cv::Moments moment = cv::moments(in);
+	double x = moment.m10/moment.m00;
+	double y = moment.m01/moment.m00;
+	cv:circle(out, cv::Point(x,y),100,cv::Scalar(0,0,255),3);
 }
