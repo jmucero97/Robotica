@@ -89,7 +89,7 @@ float Turtlebot::primerAnguloSinObstaculo()
 {
   //1º Encontrar el primer rayo que no tiene obstáculo
   bool enc = false;
-   bool enc2 = false;
+  bool enc2 = false;
   float anguloEnRadianes;
   int primerEspacio, segundoEspacio;
   int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
@@ -112,7 +112,7 @@ float Turtlebot::primerAnguloSinObstaculo()
         //RAYO SIN OBSTACULO
         //anguloEnRadianesLimite = i * -data_scan.angle_increment;
         enc2 = true;
-        segundoEspacio=j;
+        segundoEspacio = j;
       }
     }
   }
@@ -172,7 +172,7 @@ bool Turtlebot::command(double gx, double gy)
     if (!std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 1)
     {
       obstacle = true;
-      counter = 200;
+      counter = 100;
       /**
       float a = i * -data_scan.angle_increment + 0.52;
       float vector[] = {0, 0};
@@ -201,7 +201,6 @@ bool Turtlebot::command(double gx, double gy)
 **/
 
   //NORMAL EXECUTION
-  linear_vel = 0;
   angular_vel = 0.5;
 
   if (abs(alfa) > 10)
@@ -211,44 +210,42 @@ bool Turtlebot::command(double gx, double gy)
   else
   {
     angular_vel = 0.1 * alfa_in_rad / 2 * M_PI;
-    if (distance < 0.1)
+
+    linear_vel = 0.2 * distance;
+    if (linear_vel > 0.5)
     {
-      linear_vel = 0;
-      ret_val = true;
+      linear_vel = 0.5;
     }
-    else
+
+    if (obstacle || counter > 0)
     {
-      linear_vel = 0.3 * distance;
-    }
-  }
-
-  if (linear_vel > 0.5)
-  {
-    linear_vel = 0.5;
-  }
-
-   if(obstacle || counter > 0){
-    if(doAllRaysDetectObstacle()){
-      linear_vel = 0;
-      angular_vel = 0.5;
-      ROS_INFO("TODOS LOS RAYOS DETECTAN");
-    }else{
-      ROS_INFO("ALGUNOS NO DETECTAN RAYOS");
-      linear_vel = 0.1;
-      if(obstacle){
-        float angulo = primerAnguloSinObstaculo();
-
-        angular_vel = 0.5 * angulo / 2 * M_PI;
-        ROS_INFO("Radianes Rayo que deteca obstaculo: %f\n",angulo);
-      }else{
-        angular_vel = 0;
+      if (doAllRaysDetectObstacle())
+      {
+        angular_vel = 0.5;
       }
-      
-    }
-    counter--;
-  }
+      else
+      {
+        linear_vel = 0.1;
+        if (obstacle)
+        {
+          float angulo = primerAnguloSinObstaculo();
 
-  ROS_INFO("Contador: %d\n", counter);
+          angular_vel = 0.5 * angulo / 2 * M_PI;
+        }
+        else
+        {
+          angular_vel = 0;
+        }
+      }
+      counter--;
+    }
+  }
+  if (distance < 0.1)
+  {
+    linear_vel = 0;
+    angular_vel = 0;
+    ret_val = true;
+  }
 
   publish(angular_vel, linear_vel);
 
