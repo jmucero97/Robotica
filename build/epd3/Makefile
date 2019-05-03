@@ -66,51 +66,6 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -132,6 +87,51 @@ install/local: preinstall
 install/local/fast: install/local
 
 .PHONY : install/local/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,19 +166,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-epd3/CMakeFiles/epd3-c3.dir/rule:
-	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3.dir/rule
-.PHONY : epd3/CMakeFiles/epd3-c3.dir/rule
+epd3/CMakeFiles/epd3-c3-rcaa2.dir/rule:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3-rcaa2.dir/rule
+.PHONY : epd3/CMakeFiles/epd3-c3-rcaa2.dir/rule
 
 # Convenience name for target.
-epd3-c3: epd3/CMakeFiles/epd3-c3.dir/rule
+epd3-c3-rcaa2: epd3/CMakeFiles/epd3-c3-rcaa2.dir/rule
 
-.PHONY : epd3-c3
+.PHONY : epd3-c3-rcaa2
 
 # fast build rule for target.
-epd3-c3/fast:
-	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3.dir/build.make epd3/CMakeFiles/epd3-c3.dir/build
-.PHONY : epd3-c3/fast
+epd3-c3-rcaa2/fast:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa2.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa2.dir/build
+.PHONY : epd3-c3-rcaa2/fast
 
 # Convenience name for target.
 epd3/CMakeFiles/epd3-c3-rcaa.dir/rule:
@@ -194,6 +194,63 @@ epd3-c3-rcaa: epd3/CMakeFiles/epd3-c3-rcaa.dir/rule
 epd3-c3-rcaa/fast:
 	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa.dir/build
 .PHONY : epd3-c3-rcaa/fast
+
+# Convenience name for target.
+epd3/CMakeFiles/epd3-c3-robot.dir/rule:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3-robot.dir/rule
+.PHONY : epd3/CMakeFiles/epd3-c3-robot.dir/rule
+
+# Convenience name for target.
+epd3-c3-robot: epd3/CMakeFiles/epd3-c3-robot.dir/rule
+
+.PHONY : epd3-c3-robot
+
+# fast build rule for target.
+epd3-c3-robot/fast:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robot.dir/build.make epd3/CMakeFiles/epd3-c3-robot.dir/build
+.PHONY : epd3-c3-robot/fast
+
+# Convenience name for target.
+epd3/CMakeFiles/epd3-c3.dir/rule:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3.dir/rule
+.PHONY : epd3/CMakeFiles/epd3-c3.dir/rule
+
+# Convenience name for target.
+epd3-c3: epd3/CMakeFiles/epd3-c3.dir/rule
+
+.PHONY : epd3-c3
+
+# fast build rule for target.
+epd3-c3/fast:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3.dir/build.make epd3/CMakeFiles/epd3-c3.dir/build
+.PHONY : epd3-c3/fast
+
+src/1c3-rcaa2.o: src/1c3-rcaa2.cpp.o
+
+.PHONY : src/1c3-rcaa2.o
+
+# target to build an object file
+src/1c3-rcaa2.cpp.o:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa2.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa2.dir/src/1c3-rcaa2.cpp.o
+.PHONY : src/1c3-rcaa2.cpp.o
+
+src/1c3-rcaa2.i: src/1c3-rcaa2.cpp.i
+
+.PHONY : src/1c3-rcaa2.i
+
+# target to preprocess a source file
+src/1c3-rcaa2.cpp.i:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa2.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa2.dir/src/1c3-rcaa2.cpp.i
+.PHONY : src/1c3-rcaa2.cpp.i
+
+src/1c3-rcaa2.s: src/1c3-rcaa2.cpp.s
+
+.PHONY : src/1c3-rcaa2.s
+
+# target to generate assembly for a file
+src/1c3-rcaa2.cpp.s:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa2.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa2.dir/src/1c3-rcaa2.cpp.s
+.PHONY : src/1c3-rcaa2.cpp.s
 
 src/c3-rcaa.o: src/c3-rcaa.cpp.o
 
@@ -221,6 +278,33 @@ src/c3-rcaa.s: src/c3-rcaa.cpp.s
 src/c3-rcaa.cpp.s:
 	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa.dir/src/c3-rcaa.cpp.s
 .PHONY : src/c3-rcaa.cpp.s
+
+src/c3-robot.o: src/c3-robot.cpp.o
+
+.PHONY : src/c3-robot.o
+
+# target to build an object file
+src/c3-robot.cpp.o:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robot.dir/build.make epd3/CMakeFiles/epd3-c3-robot.dir/src/c3-robot.cpp.o
+.PHONY : src/c3-robot.cpp.o
+
+src/c3-robot.i: src/c3-robot.cpp.i
+
+.PHONY : src/c3-robot.i
+
+# target to preprocess a source file
+src/c3-robot.cpp.i:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robot.dir/build.make epd3/CMakeFiles/epd3-c3-robot.dir/src/c3-robot.cpp.i
+.PHONY : src/c3-robot.cpp.i
+
+src/c3-robot.s: src/c3-robot.cpp.s
+
+.PHONY : src/c3-robot.s
+
+# target to generate assembly for a file
+src/c3-robot.cpp.s:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robot.dir/build.make epd3/CMakeFiles/epd3-c3-robot.dir/src/c3-robot.cpp.s
+.PHONY : src/c3-robot.cpp.s
 
 src/c3.o: src/c3.cpp.o
 
@@ -255,18 +339,26 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... list_install_components"
-	@echo "... install"
-	@echo "... rebuild_cache"
-	@echo "... edit_cache"
-	@echo "... test"
-	@echo "... epd3-c3"
+	@echo "... epd3-c3-rcaa2"
 	@echo "... epd3-c3-rcaa"
+	@echo "... list_install_components"
 	@echo "... install/strip"
 	@echo "... install/local"
+	@echo "... epd3-c3-robot"
+	@echo "... epd3-c3"
+	@echo "... test"
+	@echo "... edit_cache"
+	@echo "... rebuild_cache"
+	@echo "... install"
+	@echo "... src/1c3-rcaa2.o"
+	@echo "... src/1c3-rcaa2.i"
+	@echo "... src/1c3-rcaa2.s"
 	@echo "... src/c3-rcaa.o"
 	@echo "... src/c3-rcaa.i"
 	@echo "... src/c3-rcaa.s"
+	@echo "... src/c3-robot.o"
+	@echo "... src/c3-robot.i"
+	@echo "... src/c3-robot.s"
 	@echo "... src/c3.o"
 	@echo "... src/c3.i"
 	@echo "... src/c3.s"

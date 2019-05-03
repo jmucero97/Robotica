@@ -1,0 +1,8 @@
+prefix=/home/juanma/catkin_ws/install
+
+Name: cereal_port
+Description: Description of cereal_port
+Version: 1.0.0
+Cflags: -I/home/juanma/catkin_ws/install/include
+Libs: -L/home/juanma/catkin_ws/install/lib 
+Requires: 

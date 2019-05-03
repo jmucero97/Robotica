@@ -117,11 +117,18 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/juanma/catkin_ws/build/gtest/cmake_install.cmake")
+  include("/home/juanma/catkin_ws/build/driver_common/driver_common/cmake_install.cmake")
+  include("/home/juanma/catkin_ws/build/magabot-idmind-ros/src/cereal_port/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/epd4/cmake_install.cmake")
+  include("/home/juanma/catkin_ws/build/driver_common/timestamp_tools/cmake_install.cmake")
+  include("/home/juanma/catkin_ws/build/driver_common/driver_base/cmake_install.cmake")
+  include("/home/juanma/catkin_ws/build/hokuyo_node/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/epd1/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/epd2/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/epd3/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/epd5/cmake_install.cmake")
+  include("/home/juanma/catkin_ws/build/magabot-idmind-ros/src/magabot/cmake_install.cmake")
+  include("/home/juanma/catkin_ws/build/robotics_challenge/cmake_install.cmake")
 
 endif()
 

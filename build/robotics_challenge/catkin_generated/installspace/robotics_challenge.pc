@@ -1,0 +1,8 @@
+prefix=/home/juanma/catkin_ws/install
+
+Name: robotics_challenge
+Description: Description of robotics_challenge
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/juanma/catkin_ws/install/lib 
+Requires: base_local_planner costmap_2d geometry_msgs nav_core roscpp std_msgs tf visualization_msgs rosbag

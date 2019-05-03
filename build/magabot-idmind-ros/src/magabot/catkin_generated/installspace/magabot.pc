@@ -1,0 +1,8 @@
+prefix=/home/juanma/catkin_ws/install
+
+Name: magabot
+Description: Description of magabot
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/juanma/catkin_ws/install/lib 
+Requires: 

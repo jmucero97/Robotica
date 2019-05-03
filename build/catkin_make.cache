@@ -1,2 +1,2 @@
-epd1:epd2:epd3:epd4:epd5
+driver_common/driver_base:driver_common/driver_common:driver_common/timestamp_tools:epd1:epd2:epd3:epd4:epd5:hokuyo_node:magabot-idmind-ros/src/cereal_port:magabot-idmind-ros/src/magabot:robotics_challenge
 -DCATKIN_DEVEL_PREFIX=/home/juanma/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/juanma/catkin_ws/install -G Unix Makefiles

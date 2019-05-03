@@ -213,7 +213,9 @@ bool Turtlebot::command(double gx, double gy)
     if(doAllRaysDetectObstacle()){
       linear_vel = 0;
       angular_vel = 0.5;
+      ROS_INFO("TODOS LOS RAYOS DETECTAN");
     }else{
+      ROS_INFO("ALGUNOS NO DETECTAN RAYOS");
       linear_vel = 0.1;
       if(obstacle){
         float angulo = primerAnguloSinObstaculo() + 0.3;
