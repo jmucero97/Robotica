@@ -19,11 +19,14 @@
 // Representation (RVIZ)
 #include <visualization_msgs/Marker.h>
 
+
+
 /**
 * Our class to control the robot
 * It has members to store the robot pose, and
 * methods to control the robot by publishing data
 */
+
 class Turtlebot
 {
 public:
@@ -39,6 +42,8 @@ public:
 
 private:
   ros::NodeHandle nh_;
+
+  double DISTANCE;
 
   //2D robot pose
   double x, y, theta;
@@ -66,6 +71,7 @@ private:
 
 Turtlebot::Turtlebot()
 {
+  DISTANCE = 0.50;
   counter = 0;
   vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel_mux/input/navi", 1);
 
@@ -79,7 +85,7 @@ bool Turtlebot::doAllRaysDetectObstacle()
   int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
   for (int i = 0; i < numAngles; i++)
   {
-    allDetect = allDetect && !std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 1;
+    allDetect = allDetect && !std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < DISTANCE;
   }
 
   return allDetect;
@@ -89,35 +95,22 @@ float Turtlebot::primerAnguloSinObstaculo()
 {
   //1º Encontrar el primer rayo que no tiene obstáculo
   bool enc = false;
-  bool enc2 = false;
   float anguloEnRadianes;
-  int primerEspacio, segundoEspacio;
+  int indicePrimerAngulo;
   int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
   for (int i = 0; (i < numAngles) && !enc; i++)
   {
-    if (std::isnan(data_scan.ranges.at(i)) || data_scan.ranges.at(i) >= 1)
+    if (std::isnan(data_scan.ranges.at(i)) || data_scan.ranges.at(i) >= DISTANCE)
     {
       //RAYO SIN OBSTACULO
       //anguloEnRadianes = i * -data_scan.angle_increment + 0.52;
       enc = true;
-      primerEspacio = i;
-    }
-  }
-  if (enc)
-  {
-    for (int j = primerEspacio; (j < numAngles) && !enc2; j++)
-    {
-      if (!std::isnan(data_scan.ranges.at(j)) || data_scan.ranges.at(j) <= 1)
-      {
-        //RAYO SIN OBSTACULO
-        //anguloEnRadianesLimite = i * -data_scan.angle_increment;
-        enc2 = true;
-        segundoEspacio = j;
-      }
+      indicePrimerAngulo = i;
     }
   }
 
-  float angulo = (segundoEspacio - primerEspacio) * data_scan.angle_increment;
+  float angulo = indicePrimerAngulo * -data_scan.angle_increment + 0.52;
+  ROS_INFO("Angulo sin obstaculo: %f\n",angulo);
 
   return angulo;
 }
@@ -148,13 +141,13 @@ bool Turtlebot::command(double gx, double gy)
   {
     listener.transformPoint("base_link", goal, base_goal);
 
-    ROS_INFO("goal: (%.2f, %.2f. %.2f) -----> base_goal: (%.2f, %.2f, %.2f) at time %.2f",
+    /**ROS_INFO("goal: (%.2f, %.2f. %.2f) -----> base_goal: (%.2f, %.2f, %.2f) at time %.2f",
              goal.point.x, goal.point.y, goal.point.z,
-             base_goal.point.x, base_goal.point.y, base_goal.point.z, base_goal.header.stamp.toSec());
+             base_goal.point.x, base_goal.point.y, base_goal.point.z, base_goal.header.stamp.toSec());**/
   }
   catch (tf::TransformException &ex)
   {
-    ROS_ERROR("Received an exception trying to transform a point from \"base_laser\" to \"base_link\": %s", ex.what());
+    //ROS_ERROR("Received an exception trying to transform a point from \"base_laser\" to \"base_link\": %s", ex.what());
     return ret_val;
   }
 
@@ -169,29 +162,12 @@ bool Turtlebot::command(double gx, double gy)
 
   for (int i = 0; i < numAngles; i++)
   {
-    if (!std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < 1)
+    if (!std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < DISTANCE)
     {
       obstacle = true;
       counter = 100;
-      /**
-      float a = i * -data_scan.angle_increment + 0.52;
-      float vector[] = {0, 0};
-      calcularVector(data_scan.ranges.at(i), a, vector);
-      float d = pow(vector[0], 2) + pow(vector[1], 2);
-      vector[0] = vector[0]/d;
-      vector[1] = vector[1]/d;
-      float vx = vectorFinal[0] + vector[0];
-      float vy = vectorFinal[1] + vector[1];
-      vectorFinal[0] = vx;
-      vectorFinal[1] = vy;**/
     }
   }
-  /**
-  float vectorObjetivo[] = {base_goal.point.x, base_goal.point.y};
-  float x = vectorObjetivo[0] - vectorFinal[0];
-  float y = vectorObjetivo[1] - vectorFinal[1];
-  vectorFinal[0] = x;
-  vectorFinal[1] = y;**/
 
   float alfa_in_rad = atan2(base_goal.point.y, base_goal.point.x); //Desviación de orientación respecto al goal en radianes
   float alfa = 180 * alfa_in_rad / M_PI;                           //Ángulo en grados
@@ -216,30 +192,34 @@ bool Turtlebot::command(double gx, double gy)
     {
       linear_vel = 0.5;
     }
+  }
 
-    if (obstacle || counter > 0)
+  if (obstacle || counter > 0)
+  {
+    if (doAllRaysDetectObstacle())
     {
-      if (doAllRaysDetectObstacle())
+      angular_vel = 0.5;
+      ROS_INFO("TODOS DETECTAN OBSTACULO");
+    }
+    else
+    {
+      linear_vel = 0.1;
+      if (obstacle)
       {
-        angular_vel = 0.5;
+        float angulo = primerAnguloSinObstaculo();
+        ROS_INFO("PRIMER ANGULO SIN OBSTACULO");
+
+        angular_vel = 0.5 * -angulo / 2 * M_PI;
       }
       else
       {
-        linear_vel = 0.1;
-        if (obstacle)
-        {
-          float angulo = primerAnguloSinObstaculo();
-
-          angular_vel = 0.5 * angulo / 2 * M_PI;
-        }
-        else
-        {
-          angular_vel = 0;
-        }
+        ROS_INFO("SIGUE RECTO");
+        angular_vel = 0;
       }
-      counter--;
     }
+    counter--;
   }
+
   if (distance < 0.1)
   {
     linear_vel = 0;

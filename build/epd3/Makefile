@@ -56,6 +56,17 @@ CMAKE_BINARY_DIR = /home/juanma/catkin_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
 # Special rule for the target list_install_components
 list_install_components:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
@@ -110,17 +121,6 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -166,19 +166,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-epd3/CMakeFiles/epd3-c3-rcaa2.dir/rule:
-	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3-rcaa2.dir/rule
-.PHONY : epd3/CMakeFiles/epd3-c3-rcaa2.dir/rule
+epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/rule:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/rule
+.PHONY : epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/rule
 
 # Convenience name for target.
-epd3-c3-rcaa2: epd3/CMakeFiles/epd3-c3-rcaa2.dir/rule
+epd3-c3-robotics-challenge: epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/rule
 
-.PHONY : epd3-c3-rcaa2
+.PHONY : epd3-c3-robotics-challenge
 
 # fast build rule for target.
-epd3-c3-rcaa2/fast:
-	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa2.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa2.dir/build
-.PHONY : epd3-c3-rcaa2/fast
+epd3-c3-robotics-challenge/fast:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/build.make epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/build
+.PHONY : epd3-c3-robotics-challenge/fast
 
 # Convenience name for target.
 epd3/CMakeFiles/epd3-c3-rcaa.dir/rule:
@@ -224,33 +224,6 @@ epd3-c3: epd3/CMakeFiles/epd3-c3.dir/rule
 epd3-c3/fast:
 	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3.dir/build.make epd3/CMakeFiles/epd3-c3.dir/build
 .PHONY : epd3-c3/fast
-
-src/1c3-rcaa2.o: src/1c3-rcaa2.cpp.o
-
-.PHONY : src/1c3-rcaa2.o
-
-# target to build an object file
-src/1c3-rcaa2.cpp.o:
-	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa2.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa2.dir/src/1c3-rcaa2.cpp.o
-.PHONY : src/1c3-rcaa2.cpp.o
-
-src/1c3-rcaa2.i: src/1c3-rcaa2.cpp.i
-
-.PHONY : src/1c3-rcaa2.i
-
-# target to preprocess a source file
-src/1c3-rcaa2.cpp.i:
-	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa2.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa2.dir/src/1c3-rcaa2.cpp.i
-.PHONY : src/1c3-rcaa2.cpp.i
-
-src/1c3-rcaa2.s: src/1c3-rcaa2.cpp.s
-
-.PHONY : src/1c3-rcaa2.s
-
-# target to generate assembly for a file
-src/1c3-rcaa2.cpp.s:
-	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-rcaa2.dir/build.make epd3/CMakeFiles/epd3-c3-rcaa2.dir/src/1c3-rcaa2.cpp.s
-.PHONY : src/1c3-rcaa2.cpp.s
 
 src/c3-rcaa.o: src/c3-rcaa.cpp.o
 
@@ -333,13 +306,41 @@ src/c3.cpp.s:
 	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3.dir/build.make epd3/CMakeFiles/epd3-c3.dir/src/c3.cpp.s
 .PHONY : src/c3.cpp.s
 
+src/robotics_challenge.o: src/robotics_challenge.cpp.o
+
+.PHONY : src/robotics_challenge.o
+
+# target to build an object file
+src/robotics_challenge.cpp.o:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/build.make epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/src/robotics_challenge.cpp.o
+.PHONY : src/robotics_challenge.cpp.o
+
+src/robotics_challenge.i: src/robotics_challenge.cpp.i
+
+.PHONY : src/robotics_challenge.i
+
+# target to preprocess a source file
+src/robotics_challenge.cpp.i:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/build.make epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/src/robotics_challenge.cpp.i
+.PHONY : src/robotics_challenge.cpp.i
+
+src/robotics_challenge.s: src/robotics_challenge.cpp.s
+
+.PHONY : src/robotics_challenge.s
+
+# target to generate assembly for a file
+src/robotics_challenge.cpp.s:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/build.make epd3/CMakeFiles/epd3-c3-robotics-challenge.dir/src/robotics_challenge.cpp.s
+.PHONY : src/robotics_challenge.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... epd3-c3-rcaa2"
+	@echo "... epd3-c3-robotics-challenge"
+	@echo "... rebuild_cache"
 	@echo "... epd3-c3-rcaa"
 	@echo "... list_install_components"
 	@echo "... install/strip"
@@ -348,11 +349,7 @@ help:
 	@echo "... epd3-c3"
 	@echo "... test"
 	@echo "... edit_cache"
-	@echo "... rebuild_cache"
 	@echo "... install"
-	@echo "... src/1c3-rcaa2.o"
-	@echo "... src/1c3-rcaa2.i"
-	@echo "... src/1c3-rcaa2.s"
 	@echo "... src/c3-rcaa.o"
 	@echo "... src/c3-rcaa.i"
 	@echo "... src/c3-rcaa.s"
@@ -362,6 +359,9 @@ help:
 	@echo "... src/c3.o"
 	@echo "... src/c3.i"
 	@echo "... src/c3.s"
+	@echo "... src/robotics_challenge.o"
+	@echo "... src/robotics_challenge.i"
+	@echo "... src/robotics_challenge.s"
 .PHONY : help
 
 
