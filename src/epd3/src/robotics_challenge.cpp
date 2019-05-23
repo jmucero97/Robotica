@@ -208,8 +208,8 @@ bool Turtlebot::command(double gx, double gy)
       {
         float angulo = primerAnguloSinObstaculo();
         ROS_INFO("PRIMER ANGULO SIN OBSTACULO");
-
-        angular_vel = 0.5 * -angulo / 2 * M_PI;
+        linear_vel = 0;
+        angular_vel = 0.5 * angulo / 2 * M_PI;
       }
       else
       {
