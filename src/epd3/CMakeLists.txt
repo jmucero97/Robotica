@@ -123,12 +123,16 @@ add_executable(epd3-c3 src/c3.cpp)
 add_executable(epd3-c3-rcaa src/c3-rcaa.cpp)
 add_executable(epd3-c3-robot src/c3-robot.cpp)
 add_executable(epd3-c3-robotics-challenge src/robotics_challenge.cpp)
+add_executable(epd3-c3-robotics-challenge-dda src/robotics_challenge-dda.cpp)
+add_executable(epd3-c3-testing src/c3-testing.cpp)
 #add_executable(c2 src/c2.cpp)
 
 target_link_libraries(epd3-c3 ${catkin_LIBRARIES})
 target_link_libraries(epd3-c3-rcaa ${catkin_LIBRARIES})
 target_link_libraries(epd3-c3-robot ${catkin_LIBRARIES})
 target_link_libraries(epd3-c3-robotics-challenge ${catkin_LIBRARIES})
+target_link_libraries(epd3-c3-robotics-challenge-dda ${catkin_LIBRARIES})
+target_link_libraries(epd3-c3-testing ${catkin_LIBRARIES})
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/epd3.cpp

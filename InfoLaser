@@ -1,0 +1,8 @@
+Resumen de los comportamientos de lecturas láser:
+
+* El rango de detección de obstáculos es entre 5.4 y 0.5m. Fuera de ese rango, es NaN.
+  Esto quiere decir que si un obstáculo está demasiado cerca, se detecta NaN.
+* Puede haber NaNs aleatorios aislados. (0.5m 0.5m NAN 0.5m 0.5m ...)
+* El barrido del láser es de izquiera a derecha, siendo i=0 la información del rayo más a la derecha.
+* Numero total de rayos: 639.
+

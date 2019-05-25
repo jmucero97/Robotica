@@ -71,7 +71,7 @@ private:
 
 Turtlebot::Turtlebot()
 {
-  DISTANCE = 0.50;
+  DISTANCE = 0.7;
   counter = 0;
   vel_pub_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel_mux/input/navi", 1);
 
@@ -82,7 +82,7 @@ bool Turtlebot::doAllRaysDetectObstacle()
 {
 
   bool allDetect = true;
-  int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
+  int numAngles = (data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment;
   for (int i = 0; i < numAngles; i++)
   {
     allDetect = allDetect && !std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < DISTANCE;
@@ -94,23 +94,34 @@ bool Turtlebot::doAllRaysDetectObstacle()
 float Turtlebot::primerAnguloSinObstaculo()
 {
   //1º Encontrar el primer rayo que no tiene obstáculo
+  float DISTANCE_ESPECIAL = 5;
   bool enc = false;
+  float angulo = 0;
   float anguloEnRadianes;
   int indicePrimerAngulo;
-  int numAngles = ceil((data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment);
-  for (int i = 0; (i < numAngles) && !enc; i++)
+  int numAngles = (data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment;
+  ROS_INFO("\n\tNUM ANGLES: %d\n",numAngles);
+  ROS_INFO("\n\t DATA SCAN ANGLE MAX: %f \n\t DATA SCAN ANGLE MIN: %f\n\t ANGLE INCREMENT: %f\n",data_scan.angle_max,data_scan.angle_min,data_scan.angle_increment);
+  for (int i = numAngles; (i > 0) && !enc; i--)
   {
-    if (std::isnan(data_scan.ranges.at(i)) || data_scan.ranges.at(i) >= DISTANCE)
+    if ((std::isnan(data_scan.ranges.at(i)) || data_scan.ranges.at(i) >= DISTANCE_ESPECIAL) && (i >= 200 && i <= 320))
     {
       //RAYO SIN OBSTACULO
       //anguloEnRadianes = i * -data_scan.angle_increment + 0.52;
       enc = true;
       indicePrimerAngulo = i;
+      
+      if(i < numAngles/2){
+        angulo = +1;
+      }else{
+        angulo = -1;
+      }
+      
     }
   }
+  ROS_INFO("NumAngles: %d \nI: %d\nPRIMER ANGULO SIN OBSTACULO: %f\n",numAngles,indicePrimerAngulo,angulo);
+  //angulo = indicePrimerAngulo * -data_scan.angle_increment + 0.52;
 
-  float angulo = indicePrimerAngulo * -data_scan.angle_increment + 0.52;
-  ROS_INFO("Angulo sin obstaculo: %f\n",angulo);
 
   return angulo;
 }
@@ -207,9 +218,8 @@ bool Turtlebot::command(double gx, double gy)
       if (obstacle)
       {
         float angulo = primerAnguloSinObstaculo();
-        ROS_INFO("PRIMER ANGULO SIN OBSTACULO");
         linear_vel = 0;
-        angular_vel = 0.5 * angulo / 2 * M_PI;
+        angular_vel = 0.5 * angulo;
       }
       else
       {

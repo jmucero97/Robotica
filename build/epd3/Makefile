@@ -99,6 +99,18 @@ install/local/fast: install/local
 
 .PHONY : install/local/fast
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
@@ -120,18 +132,6 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -196,6 +196,21 @@ epd3-c3-rcaa/fast:
 .PHONY : epd3-c3-rcaa/fast
 
 # Convenience name for target.
+epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/rule:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/rule
+.PHONY : epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/rule
+
+# Convenience name for target.
+epd3-c3-robotics-challenge-dda: epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/rule
+
+.PHONY : epd3-c3-robotics-challenge-dda
+
+# fast build rule for target.
+epd3-c3-robotics-challenge-dda/fast:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/build.make epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/build
+.PHONY : epd3-c3-robotics-challenge-dda/fast
+
+# Convenience name for target.
 epd3/CMakeFiles/epd3-c3-robot.dir/rule:
 	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3-robot.dir/rule
 .PHONY : epd3/CMakeFiles/epd3-c3-robot.dir/rule
@@ -224,6 +239,21 @@ epd3-c3: epd3/CMakeFiles/epd3-c3.dir/rule
 epd3-c3/fast:
 	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3.dir/build.make epd3/CMakeFiles/epd3-c3.dir/build
 .PHONY : epd3-c3/fast
+
+# Convenience name for target.
+epd3/CMakeFiles/epd3-c3-testing.dir/rule:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 epd3/CMakeFiles/epd3-c3-testing.dir/rule
+.PHONY : epd3/CMakeFiles/epd3-c3-testing.dir/rule
+
+# Convenience name for target.
+epd3-c3-testing: epd3/CMakeFiles/epd3-c3-testing.dir/rule
+
+.PHONY : epd3-c3-testing
+
+# fast build rule for target.
+epd3-c3-testing/fast:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-testing.dir/build.make epd3/CMakeFiles/epd3-c3-testing.dir/build
+.PHONY : epd3-c3-testing/fast
 
 src/c3-rcaa.o: src/c3-rcaa.cpp.o
 
@@ -279,6 +309,33 @@ src/c3-robot.cpp.s:
 	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robot.dir/build.make epd3/CMakeFiles/epd3-c3-robot.dir/src/c3-robot.cpp.s
 .PHONY : src/c3-robot.cpp.s
 
+src/c3-testing.o: src/c3-testing.cpp.o
+
+.PHONY : src/c3-testing.o
+
+# target to build an object file
+src/c3-testing.cpp.o:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-testing.dir/build.make epd3/CMakeFiles/epd3-c3-testing.dir/src/c3-testing.cpp.o
+.PHONY : src/c3-testing.cpp.o
+
+src/c3-testing.i: src/c3-testing.cpp.i
+
+.PHONY : src/c3-testing.i
+
+# target to preprocess a source file
+src/c3-testing.cpp.i:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-testing.dir/build.make epd3/CMakeFiles/epd3-c3-testing.dir/src/c3-testing.cpp.i
+.PHONY : src/c3-testing.cpp.i
+
+src/c3-testing.s: src/c3-testing.cpp.s
+
+.PHONY : src/c3-testing.s
+
+# target to generate assembly for a file
+src/c3-testing.cpp.s:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-testing.dir/build.make epd3/CMakeFiles/epd3-c3-testing.dir/src/c3-testing.cpp.s
+.PHONY : src/c3-testing.cpp.s
+
 src/c3.o: src/c3.cpp.o
 
 .PHONY : src/c3.o
@@ -305,6 +362,33 @@ src/c3.s: src/c3.cpp.s
 src/c3.cpp.s:
 	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3.dir/build.make epd3/CMakeFiles/epd3-c3.dir/src/c3.cpp.s
 .PHONY : src/c3.cpp.s
+
+src/robotics_challenge-dda.o: src/robotics_challenge-dda.cpp.o
+
+.PHONY : src/robotics_challenge-dda.o
+
+# target to build an object file
+src/robotics_challenge-dda.cpp.o:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/build.make epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/src/robotics_challenge-dda.cpp.o
+.PHONY : src/robotics_challenge-dda.cpp.o
+
+src/robotics_challenge-dda.i: src/robotics_challenge-dda.cpp.i
+
+.PHONY : src/robotics_challenge-dda.i
+
+# target to preprocess a source file
+src/robotics_challenge-dda.cpp.i:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/build.make epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/src/robotics_challenge-dda.cpp.i
+.PHONY : src/robotics_challenge-dda.cpp.i
+
+src/robotics_challenge-dda.s: src/robotics_challenge-dda.cpp.s
+
+.PHONY : src/robotics_challenge-dda.s
+
+# target to generate assembly for a file
+src/robotics_challenge-dda.cpp.s:
+	cd /home/juanma/catkin_ws/build && $(MAKE) -f epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/build.make epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/src/robotics_challenge-dda.cpp.s
+.PHONY : src/robotics_challenge-dda.cpp.s
 
 src/robotics_challenge.o: src/robotics_challenge.cpp.o
 
@@ -339,26 +423,34 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... epd3-c3-robotics-challenge"
 	@echo "... rebuild_cache"
+	@echo "... epd3-c3-robotics-challenge"
 	@echo "... epd3-c3-rcaa"
 	@echo "... list_install_components"
 	@echo "... install/strip"
 	@echo "... install/local"
+	@echo "... install"
+	@echo "... epd3-c3-robotics-challenge-dda"
 	@echo "... epd3-c3-robot"
 	@echo "... epd3-c3"
+	@echo "... epd3-c3-testing"
 	@echo "... test"
 	@echo "... edit_cache"
-	@echo "... install"
 	@echo "... src/c3-rcaa.o"
 	@echo "... src/c3-rcaa.i"
 	@echo "... src/c3-rcaa.s"
 	@echo "... src/c3-robot.o"
 	@echo "... src/c3-robot.i"
 	@echo "... src/c3-robot.s"
+	@echo "... src/c3-testing.o"
+	@echo "... src/c3-testing.i"
+	@echo "... src/c3-testing.s"
 	@echo "... src/c3.o"
 	@echo "... src/c3.i"
 	@echo "... src/c3.s"
+	@echo "... src/robotics_challenge-dda.o"
+	@echo "... src/robotics_challenge-dda.i"
+	@echo "... src/robotics_challenge-dda.s"
 	@echo "... src/robotics_challenge.o"
 	@echo "... src/robotics_challenge.i"
 	@echo "... src/robotics_challenge.s"

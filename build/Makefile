@@ -1895,6 +1895,19 @@ epd3-c3-rcaa/fast:
 .PHONY : epd3-c3-rcaa/fast
 
 #=============================================================================
+# Target rules for targets named epd3-c3-robotics-challenge-dda
+
+# Build rule for target.
+epd3-c3-robotics-challenge-dda: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 epd3-c3-robotics-challenge-dda
+.PHONY : epd3-c3-robotics-challenge-dda
+
+# fast build rule for target.
+epd3-c3-robotics-challenge-dda/fast:
+	$(MAKE) -f epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/build.make epd3/CMakeFiles/epd3-c3-robotics-challenge-dda.dir/build
+.PHONY : epd3-c3-robotics-challenge-dda/fast
+
+#=============================================================================
 # Target rules for targets named epd3-c3-robot
 
 # Build rule for target.
@@ -1919,6 +1932,19 @@ epd3-c3: cmake_check_build_system
 epd3-c3/fast:
 	$(MAKE) -f epd3/CMakeFiles/epd3-c3.dir/build.make epd3/CMakeFiles/epd3-c3.dir/build
 .PHONY : epd3-c3/fast
+
+#=============================================================================
+# Target rules for targets named epd3-c3-testing
+
+# Build rule for target.
+epd3-c3-testing: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 epd3-c3-testing
+.PHONY : epd3-c3-testing
+
+# fast build rule for target.
+epd3-c3-testing/fast:
+	$(MAKE) -f epd3/CMakeFiles/epd3-c3-testing.dir/build.make epd3/CMakeFiles/epd3-c3-testing.dir/build
+.PHONY : epd3-c3-testing/fast
 
 #=============================================================================
 # Target rules for targets named epd5_c1
@@ -2833,8 +2859,10 @@ help:
 	@echo "... c2-new"
 	@echo "... epd3-c3-robotics-challenge"
 	@echo "... epd3-c3-rcaa"
+	@echo "... epd3-c3-robotics-challenge-dda"
 	@echo "... epd3-c3-robot"
 	@echo "... epd3-c3"
+	@echo "... epd3-c3-testing"
 	@echo "... epd5_c1"
 	@echo "... nav_msgs_generate_messages_lisp"
 	@echo "... nav_msgs_generate_messages_nodejs"
