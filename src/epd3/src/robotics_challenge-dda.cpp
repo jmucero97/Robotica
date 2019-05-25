@@ -73,7 +73,7 @@ private:
 
 Turtlebot::Turtlebot()
 {
-  DISTANCE = 0.7;
+  DISTANCE = 0.8;
   counter = 0;
   contadorDecisionGiro = 0;
   decisionGiro = 0;
@@ -304,13 +304,13 @@ bool Turtlebot::command(double gx, double gy)
     }
     else
     {
-      linear_vel = 0.1;
+      linear_vel = 0.2;
       if (obstacle)
       {
       	if(contadorDecisionGiro < 0){
         	float direccionGiro = primerAnguloSinObstaculo();
   		decisionGiro = direccionGiro;
-  		contadorDecisionGiro = 50;
+  		contadorDecisionGiro = 100;
         }
         linear_vel = 0;
         angular_vel = 0.5 * decisionGiro;
