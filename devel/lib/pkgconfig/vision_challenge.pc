@@ -1,0 +1,8 @@
+prefix=/home/juanma/catkin_ws/devel
+
+Name: vision_challenge
+Description: Description of vision_challenge
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/juanma/catkin_ws/devel/lib 
+Requires: 

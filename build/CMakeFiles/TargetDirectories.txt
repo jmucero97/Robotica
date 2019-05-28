@@ -255,6 +255,14 @@
 /home/juanma/catkin_ws/build/magabot-idmind-ros/src/magabot/CMakeFiles/joystick_node.dir
 /home/juanma/catkin_ws/build/magabot-idmind-ros/src/magabot/CMakeFiles/nav_msgs_generate_messages_cpp.dir
 /home/juanma/catkin_ws/build/magabot-idmind-ros/src/magabot/CMakeFiles/test.dir
+/home/juanma/catkin_ws/build/vision-challenge/CMakeFiles/list_install_components.dir
+/home/juanma/catkin_ws/build/vision-challenge/CMakeFiles/install.dir
+/home/juanma/catkin_ws/build/vision-challenge/CMakeFiles/rebuild_cache.dir
+/home/juanma/catkin_ws/build/vision-challenge/CMakeFiles/edit_cache.dir
+/home/juanma/catkin_ws/build/vision-challenge/CMakeFiles/test.dir
+/home/juanma/catkin_ws/build/vision-challenge/CMakeFiles/vision-challenge.dir
+/home/juanma/catkin_ws/build/vision-challenge/CMakeFiles/install/strip.dir
+/home/juanma/catkin_ws/build/vision-challenge/CMakeFiles/install/local.dir
 /home/juanma/catkin_ws/build/robotics_challenge/CMakeFiles/install.dir
 /home/juanma/catkin_ws/build/robotics_challenge/CMakeFiles/rebuild_cache.dir
 /home/juanma/catkin_ws/build/robotics_challenge/CMakeFiles/install/local.dir

@@ -2051,6 +2051,19 @@ nav_msgs_generate_messages_cpp/fast:
 .PHONY : nav_msgs_generate_messages_cpp/fast
 
 #=============================================================================
+# Target rules for targets named vision-challenge
+
+# Build rule for target.
+vision-challenge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 vision-challenge
+.PHONY : vision-challenge
+
+# fast build rule for target.
+vision-challenge/fast:
+	$(MAKE) -f vision-challenge/CMakeFiles/vision-challenge.dir/build.make vision-challenge/CMakeFiles/vision-challenge.dir/build
+.PHONY : vision-challenge/fast
+
+#=============================================================================
 # Target rules for targets named metrics
 
 # Build rule for target.
@@ -2871,6 +2884,7 @@ help:
 	@echo "... magabot_node"
 	@echo "... joystick_node"
 	@echo "... nav_msgs_generate_messages_cpp"
+	@echo "... vision-challenge"
 	@echo "... metrics"
 	@echo "... robotics_challenge"
 	@echo "... visualization_msgs_generate_messages_py"

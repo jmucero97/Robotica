@@ -915,6 +915,18 @@ timestamp_tools_SOURCE_DIR:STATIC=/home/juanma/catkin_ws/src/driver_common/times
 //The directory containing a CMake configuration file for topic_tools.
 topic_tools_DIR:PATH=/opt/ros/kinetic/share/topic_tools/cmake
 
+//Value Computed by CMake
+vision-challenge_BINARY_DIR:STATIC=/home/juanma/catkin_ws/build/vision-challenge
+
+//Value Computed by CMake
+vision-challenge_SOURCE_DIR:STATIC=/home/juanma/catkin_ws/src/vision-challenge
+
+//Value Computed by CMake
+vision_challenge_BINARY_DIR:STATIC=/home/juanma/catkin_ws/build/vision_challenge
+
+//Value Computed by CMake
+vision_challenge_SOURCE_DIR:STATIC=/home/juanma/catkin_ws/src/vision_challenge
+
 //The directory containing a CMake configuration file for visualization_msgs.
 visualization_msgs_DIR:PATH=/opt/ros/kinetic/share/visualization_msgs/cmake
 
@@ -1064,7 +1076,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=17
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=18
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

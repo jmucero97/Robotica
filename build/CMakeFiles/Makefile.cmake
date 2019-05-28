@@ -46,6 +46,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "magabot-idmind-ros/src/magabot/catkin_generated/package.cmake"
   "robotics_challenge/catkin_generated/ordered_paths.cmake"
   "robotics_challenge/catkin_generated/package.cmake"
+  "vision-challenge/catkin_generated/ordered_paths.cmake"
+  "vision-challenge/catkin_generated/package.cmake"
   "/home/juanma/catkin_ws/devel/share/cereal_port/cmake/cereal_portConfig-version.cmake"
   "/home/juanma/catkin_ws/devel/share/cereal_port/cmake/cereal_portConfig.cmake"
   "/home/juanma/catkin_ws/devel/share/darknet_ros_msgs/cmake/darknet_ros_msgs-msg-extras.cmake"
@@ -86,6 +88,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/juanma/catkin_ws/src/magabot-idmind-ros/src/magabot/package.xml"
   "/home/juanma/catkin_ws/src/robotics_challenge/CMakeLists.txt"
   "/home/juanma/catkin_ws/src/robotics_challenge/package.xml"
+  "/home/juanma/catkin_ws/src/vision-challenge/CMakeLists.txt"
+  "/home/juanma/catkin_ws/src/vision-challenge/package.xml"
   "/opt/ros/kinetic/share/OpenCV-3.3.1-dev/OpenCVConfig-version.cmake"
   "/opt/ros/kinetic/share/OpenCV-3.3.1-dev/OpenCVConfig.cmake"
   "/opt/ros/kinetic/share/OpenCV-3.3.1-dev/OpenCVModules-release.cmake"
@@ -388,6 +392,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "epd3/CMakeFiles/CMakeDirectoryInformation.cmake"
   "epd5/CMakeFiles/CMakeDirectoryInformation.cmake"
   "magabot-idmind-ros/src/magabot/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "vision-challenge/CMakeFiles/CMakeDirectoryInformation.cmake"
   "robotics_challenge/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
@@ -538,6 +543,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "magabot-idmind-ros/src/magabot/CMakeFiles/magabot_node.dir/DependInfo.cmake"
   "magabot-idmind-ros/src/magabot/CMakeFiles/joystick_node.dir/DependInfo.cmake"
   "magabot-idmind-ros/src/magabot/CMakeFiles/nav_msgs_generate_messages_cpp.dir/DependInfo.cmake"
+  "vision-challenge/CMakeFiles/vision-challenge.dir/DependInfo.cmake"
   "robotics_challenge/CMakeFiles/metrics.dir/DependInfo.cmake"
   "robotics_challenge/CMakeFiles/robotics_challenge.dir/DependInfo.cmake"
   "robotics_challenge/CMakeFiles/visualization_msgs_generate_messages_py.dir/DependInfo.cmake"

@@ -130,6 +130,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/juanma/catkin_ws/build/epd3/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/epd5/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/magabot-idmind-ros/src/magabot/cmake_install.cmake")
+  include("/home/juanma/catkin_ws/build/vision-challenge/cmake_install.cmake")
   include("/home/juanma/catkin_ws/build/robotics_challenge/cmake_install.cmake")
 
 endif()
