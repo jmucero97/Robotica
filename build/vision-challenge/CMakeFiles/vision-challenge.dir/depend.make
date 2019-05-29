@@ -344,4 +344,5 @@ vision-challenge/CMakeFiles/vision-challenge.dir/src/student.cpp.o: /opt/ros/kin
 vision-challenge/CMakeFiles/vision-challenge.dir/src/student.cpp.o: /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv2/xfeatures2d.hpp
 vision-challenge/CMakeFiles/vision-challenge.dir/src/student.cpp.o: /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv2/xfeatures2d/cuda.hpp
 vision-challenge/CMakeFiles/vision-challenge.dir/src/student.cpp.o: /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv2/xfeatures2d/nonfree.hpp
+vision-challenge/CMakeFiles/vision-challenge.dir/src/student.cpp.o: /opt/ros/kinetic/include/sensor_msgs/image_encodings.h
 

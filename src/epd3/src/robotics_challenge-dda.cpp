@@ -99,7 +99,7 @@ float Turtlebot::primerAnguloSinObstaculo()
 {
   int direccionGiro = 0;
   int numAngles = (data_scan.angle_max - data_scan.angle_min) / data_scan.angle_increment;
-  int mitad = numAngles/2;
+  int quinto = numAngles/5;
   int indiceMayorProfundidad = 0;
   float mayorProfundidad = 0;
   int forwardIndex = 0;
@@ -204,12 +204,14 @@ float Turtlebot::primerAnguloSinObstaculo()
   }
 
   //Decidir giro dirección
-  if(indiceMayorProfundidad < mitad){
+  if(indiceMayorProfundidad < 2*quinto){
     //Girar a derecha
     direccionGiro = -1;
-  }else{
+  }else if(indiceMayorProfundidad > 3*quinto){
     direccionGiro = 1;
-  }
+  }else{
+	direccionGiro = 0;	
+}
 
   ROS_INFO("\n\tIndice profundidad: %d; Direccion Giro: %d",indiceMayorProfundidad,direccionGiro);
 
@@ -266,7 +268,7 @@ bool Turtlebot::command(double gx, double gy)
     if (!std::isnan(data_scan.ranges.at(i)) && data_scan.ranges.at(i) < DISTANCE)
     {
       obstacle = true;
-      counter = 100;
+      counter = 70;
     }
   }
 
@@ -312,8 +314,8 @@ bool Turtlebot::command(double gx, double gy)
   		decisionGiro = direccionGiro;
   		contadorDecisionGiro = 100;
         }
-        linear_vel = 0;
-        angular_vel = 0.5 * decisionGiro;
+        linear_vel = 0.1;
+        angular_vel = 0.8 * decisionGiro;
       }
       else
       {

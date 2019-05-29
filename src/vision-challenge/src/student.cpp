@@ -2,7 +2,9 @@
 
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
-
+#include <sensor_msgs/image_encodings.h>
+#include <iostream>
+#include <fstream>
 
 //This is the function to be filled in C3
 void processImage_c3(cv::Mat &in, cv::Mat &out)
@@ -82,8 +84,10 @@ void processImageCircle_c4(cv::Mat &in, cv::Mat &out)
 	double x = moment.m10/moment.m00;
 	double y = moment.m01/moment.m00;
 	cv:circle(out, cv::Point(x,y),25,cv::Scalar(0,0,255),3);
-}
 
+
+
+}
 void processImageChallenge(cv::Mat &in, cv::Mat &out)
 {
 	cv::Mat r;

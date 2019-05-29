@@ -21,13 +21,31 @@ opencv2/imgproc/imgproc.hpp
 -
 opencv2/highgui/highgui.hpp
 -
+iostream
+-
+fstream
+-
+string
+-
+cstring
+-
 student.h
 /home/juanma/catkin_ws/src/vision-challenge/src/student.h
+sstream
+-
+string.h
+-
 
 /home/juanma/catkin_ws/src/vision-challenge/src/student.cpp
 opencv2/imgproc/imgproc.hpp
 -
 opencv2/highgui/highgui.hpp
+-
+sensor_msgs/image_encodings.h
+-
+iostream
+-
+fstream
 -
 
 /home/juanma/catkin_ws/src/vision-challenge/src/student.h
